@@ -4,6 +4,7 @@
 import pygame
 from pygame.locals import *
 from constants import *
+from player import Player
 
 
 def main():
@@ -14,16 +15,28 @@ def main():
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
+    running = True
     dt = 0
 
-    while screen:
+    # instantiate a player object, pass these values to the constructor to spawn it in the middle of the screen
+    player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
+
+    while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        screen.fill((0, 0, 0))
-        pygame.display.flip()
+        screen.fill("black")
+
         time_elapsed = clock.tick(60)
+
         dt = time_elapsed / 1000
+
+        # re-render the player on the screen each frame
+        # use player.draw(screen)
+        player.draw(screen)
+        pygame.display.flip()
+
+    pygame.quit()
 
 
 if __name__ == "__main__":
