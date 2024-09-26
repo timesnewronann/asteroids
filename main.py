@@ -30,6 +30,7 @@ def main():
         time_elapsed = clock.tick(60)
 
         dt = time_elapsed / 1000
+        player.update(dt)
 
         # re-render the player on the screen each frame
         # use player.draw(screen)

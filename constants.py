@@ -7,3 +7,8 @@ ASTEROID_SPAWN_RATE = 0.8  # seconds
 ASTEROID_MAX_RADIUS = ASTEROID_MIN_RADIUS * ASTEROID_KINDS
 
 PLAYER_RADIUS = 20
+
+# Player turn speed
+PLAYER_TURN_SPEED = 300
+
+# represent player speed
