@@ -1,6 +1,6 @@
 import pygame
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED
+from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 
 
 class Player(CircleShape):
@@ -29,6 +29,18 @@ class Player(CircleShape):
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
 
+    # modify the player's position
+    def move(self, dt):
+        # 1. start with a unit vector pointing up from (0,0) to (0,1)
+        # 2. Rotate that vector by the player's rotation so it points where the player is facing
+        # 3. Multiply by PLAYER_SPEED * dt
+        # 4. Add the vector to our position to move the player.
+
+        forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        self.position += forward * PLAYER_SPEED * dt
+
+        pass
+
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
@@ -43,4 +55,9 @@ class Player(CircleShape):
             # 1. Calculate the direction vector based on the current rotation
             # 2. Scale this vector by speed and dt
             # 3. Add this to the current position
-            pass
+
+            # call the move method
+            self.move(dt)
+
+        if keys[pygame.K_s]:
+            self.move(-dt)

@@ -12,3 +12,4 @@ PLAYER_RADIUS = 20
 PLAYER_TURN_SPEED = 300
 
 # represent player speed
+PLAYER_SPEED = 200
