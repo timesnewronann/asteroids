@@ -18,6 +18,13 @@ def main():
     running = True
     dt = 0
 
+    # create two groups before the game loop
+    updatable = pygame.sprite.Group()
+
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+
     # instantiate a player object, pass these values to the constructor to spawn it in the middle of the screen
     player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
 
@@ -30,11 +37,15 @@ def main():
         time_elapsed = clock.tick(60)
 
         dt = time_elapsed / 1000
-        player.update(dt)
+
+        for update_object in updatable:
+            update_object.update(dt)
 
         # re-render the player on the screen each frame
         # use player.draw(screen)
-        player.draw(screen)
+        for draw_object in drawable:
+            draw_object.draw(screen)
+
         pygame.display.flip()
 
     pygame.quit()
