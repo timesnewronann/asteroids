@@ -5,6 +5,7 @@ import pygame
 from pygame.locals import *
 from constants import *
 from player import Player
+from asteroid import Asteroid
 
 
 def main():
@@ -22,6 +23,13 @@ def main():
     updatable = pygame.sprite.Group()
 
     drawable = pygame.sprite.Group()
+
+    # Create asteroid group
+    asteroids = pygame.sprite.Group()
+
+    # create container for asteroid to automatically add new instance
+    Asteroid.containers = (asteroids, updatable, drawable)
+    # Asteroid object will automaticalyl be a part of the asteroids group
 
     Player.containers = (updatable, drawable)
 
