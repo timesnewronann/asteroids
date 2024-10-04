@@ -1,3 +1,4 @@
+import pygame
 from circleshape import CircleShape
 
 
@@ -7,7 +8,8 @@ class Asteroid(CircleShape):
 
     def draw(self, screen):
         # pygame.draw.circle(surface, color, center, radius, width)
-        pygame.draw.circle(screen, "white", self.position, self.radius, 2)
+        pygame.draw.circle(screen, "white", (self.position.x,
+                           self.position.y), self.radius, 2)
 
     def update(self, dt):
         # updates based only on its velocity and time delta

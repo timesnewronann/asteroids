@@ -6,6 +6,7 @@ from pygame.locals import *
 from constants import *
 from player import Player
 from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 
 def main():
@@ -30,6 +31,12 @@ def main():
     # create container for asteroid to automatically add new instance
     Asteroid.containers = (asteroids, updatable, drawable)
     # Asteroid object will automaticalyl be a part of the asteroids group
+
+    # Container for AsteroidField Instances
+    AsteroidField.containers = (updatable,)
+
+    # intialize asteroid field
+    asteroidField = AsteroidField()
 
     Player.containers = (updatable, drawable)
 
