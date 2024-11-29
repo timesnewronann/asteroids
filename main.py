@@ -1,12 +1,14 @@
 # this allows us to use code from
 # the open-source pygame library
 # throughout this file
+import sys
 import pygame
 from pygame.locals import *
 from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 
 def main():
@@ -38,6 +40,12 @@ def main():
     # intialize asteroid field
     asteroidField = AsteroidField()
 
+    # Create shots groups
+    shots = pygame.sprite.Group()
+
+    # Add the shots to the contianers
+    Shot.containers = (shots, updatable, drawable)
+
     Player.containers = (updatable, drawable)
 
     # instantiate a player object, pass these values to the constructor to spawn it in the middle of the screen
@@ -56,8 +64,22 @@ def main():
         for update_object in updatable:
             update_object.update(dt)
 
-        # re-render the player on the screen each frame
-        # use player.draw(screen)
+        # perform collision check after updating the objects
+        for asteroid in asteroids:
+            if player.collisionCheck(asteroid):
+                print("Game over!")
+                sys.exit()
+
+        # second collision check to check if shots hit the asteroids
+        for asteroid in asteroids:
+            for shot in shots:
+                # check if the shot hit the asteroid
+                if shot.collisionCheck(asteroid):
+                    shot.kill()
+                    asteroid.split()
+
+                # re-render the player on the screen each frame
+                # use player.draw(screen)
         for draw_object in drawable:
             draw_object.draw(screen)
 
